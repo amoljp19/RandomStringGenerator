@@ -1,4 +1,4 @@
-package com.softaai.randomstringgenerator.provider
+package com.softaai.randomstringgenerator.deprecated.provider
 
 import android.content.ContentProvider
 import android.content.ContentUris

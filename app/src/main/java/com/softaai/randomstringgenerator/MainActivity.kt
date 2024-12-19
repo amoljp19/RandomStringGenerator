@@ -25,7 +25,7 @@ import com.softaai.randomstringgenerator.ui.theme.RandomStringGeneratorTheme
 
 class MainActivity : ComponentActivity() {
 
-    var CONTENT_URI = Uri.parse("content://com.iav.contestdataprovider/text")
+    //var CONTENT_URI = Uri.parse("content://com.iav.contestdataprovider/text")
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +33,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             RandomStringGeneratorTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding -> innerPadding
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    innerPadding
                     /*Greeting(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
@@ -43,17 +44,25 @@ class MainActivity : ComponentActivity() {
 
                         // creating a cursor object of the
                         // content URI
-                        val cursor = contentResolver.query(Uri.parse("content://com.iav.contestdataprovider/text"), null, ContentResolver.QUERY_ARG_LIMIT, null, null)
+                        val cursor = contentResolver.query(
+                            Uri.parse("content://com.iav.contestdataprovider/text"),
+                            null,
+                            ContentResolver.QUERY_ARG_LIMIT,
+                            null,
+                            null
+                        )
 
                         // iteration of the cursor
                         // to print whole table
                         if (cursor!!.moveToFirst()) {
                             val strBuild = StringBuilder()
                             while (!cursor.isAfterLast) {
-                                strBuild.append("""
+                                strBuild.append(
+                                    """
     
     ${cursor.getString(cursor.getColumnIndexOrThrow("data"))}
-    """.trimIndent())
+    """.trimIndent()
+                                )
                                 cursor.moveToNext()
                             }
                             Log.e("result", strBuild.toString())
@@ -64,27 +73,27 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    }
                 }
             }
         }
+    }
 
 }
 
 @Composable
-fun MainScreen(){
+fun MainScreen() {
     Text(text = "Show")
 }
 
 
 @Composable
-fun ButtonExample(onButtonClick: ()-> Unit){
+fun ButtonExample(onButtonClick: () -> Unit) {
     Button(
         onClick = onButtonClick,
         contentPadding = PaddingValues(all = 20.dp),
         elevation = ButtonDefaults.buttonElevation(defaultElevation = 5.dp),
         modifier = Modifier.padding(20.dp)
-    ){
+    ) {
         Text("randome string generate!")
     }
 }
