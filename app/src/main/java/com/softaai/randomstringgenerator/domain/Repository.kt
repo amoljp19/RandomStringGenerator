@@ -6,7 +6,7 @@ package com.softaai.randomstringgenerator.domain
  * softAai Apps.
  */
 interface Repository {
-    fun generateRandomString(length: Int)
+    suspend fun generateRandomString(length: Int) : RandomGeneratedString
 
     //fun deletePerticularString()
 
