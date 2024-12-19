@@ -1,11 +1,13 @@
 package com.softaai.randomstringgenerator.provider
 
 import android.content.ContentProvider
+import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Context
 import android.content.UriMatcher
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
+import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
 import android.database.sqlite.SQLiteQueryBuilder
 import android.net.Uri
@@ -117,8 +119,15 @@ class MyContentProvider : ContentProvider() {
         }
     }
 
-    override fun insert(p0: Uri, p1: ContentValues?): Uri? {
-        TODO("Not yet implemented")
+    override fun insert(uri: Uri, values: ContentValues?): Uri? {
+        val rowID = db!!.insert(TABLE_NAME, "", values)
+        if (rowID > 0) {
+            val _uri =
+                ContentUris.withAppendedId(CONTENT_URI, rowID)
+            context!!.contentResolver.notifyChange(_uri, null)
+            return _uri
+        }
+        throw SQLiteException("Failed to add a record into $uri")
     }
 
     override fun delete(uri: Uri,
@@ -133,8 +142,15 @@ class MyContentProvider : ContentProvider() {
         return count
     }
 
-    override fun update(p0: Uri, p1: ContentValues?, p2: String?, p3: Array<out String>?): Int {
-        TODO("Not yet implemented")
+    override fun update(uri: Uri, values: ContentValues?, selection: String?,
+                        selectionArgs: Array<String>?): Int {
+        var count = 0
+        count = when (uriMatcher!!.match(uri)) {
+            uriCode -> db!!.update(TABLE_NAME, values, selection, selectionArgs)
+            else -> throw IllegalArgumentException("Unknown URI $uri")
+        }
+        context!!.contentResolver.notifyChange(uri, null)
+        return count
     }
 
     // creating object of database

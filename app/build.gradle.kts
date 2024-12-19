@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.softaai.randomstringgenerator"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.softaai.randomstringgenerator"
