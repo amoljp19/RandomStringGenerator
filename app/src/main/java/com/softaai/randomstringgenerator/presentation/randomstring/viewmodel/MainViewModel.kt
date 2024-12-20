@@ -42,21 +42,21 @@ class MainViewModel @Inject constructor(private val generateRandomString: Genera
                 when (result) {
                     is Resource.Loading -> {
                         _state.value = state.value.copy(
-                            randomString = result.data?.randomString ?: "",
+                            randomString = result.data.toString(),
                             isLoading = true
                         )
                     }
 
                     is Resource.Success -> {
                         _state.value = state.value.copy(
-                            randomString = result.data?.randomString ?: "",
+                            randomString = result.data!!.randomString,
                             isLoading = false
                         )
                     }
 
                     is Resource.Error -> {
                         _state.value = state.value.copy(
-                            randomString = result.data?.randomString ?: "",
+                            randomString = result.data.toString(),
                             isLoading = false
                         )
 
