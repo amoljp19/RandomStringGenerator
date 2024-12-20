@@ -1,8 +1,11 @@
 package com.softaai.randomstringgenerator.data
 
 import android.content.ContentResolver
+import android.content.Context
 import android.net.Uri
 import com.softaai.randomstringgenerator.domain.RandomGeneratedString
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 
 /**
@@ -11,7 +14,7 @@ import com.softaai.randomstringgenerator.domain.RandomGeneratedString
  */
 class RandomStringDataSource(private val contentResolver: ContentResolver) {
 
-    suspend fun generateRandomString(length: Int): RandomGeneratedString {
+    suspend fun generateRandomString(length: Int): Flow<RandomGeneratedString> = flow {
 
         val cursor = contentResolver.query(
             Uri.parse("content://com.iav.contestdataprovider/text"),
@@ -40,7 +43,7 @@ class RandomStringDataSource(private val contentResolver: ContentResolver) {
             cursor.close()
         }
 
-        return RandomGeneratedString(strBuild.toString())
+        emit(RandomGeneratedString(strBuild.toString()))
     }
 
 }
