@@ -1,5 +1,6 @@
 package com.softaai.randomstringgenerator.data
 
+import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
@@ -12,11 +13,11 @@ import kotlinx.coroutines.flow.flow
  * Created by amoljp19 on 12/20/2024.
  * softAai Apps.
  */
-class RandomStringDataSource(private val contentResolver: ContentResolver) {
+class RandomStringDataSource(private val application: Application) {
 
     suspend fun generateRandomString(length: Int): Flow<RandomGeneratedString> = flow {
 
-        val cursor = contentResolver.query(
+        val cursor = application.contentResolver.query(
             Uri.parse("content://com.iav.contestdataprovider/text"),
             null,
             ContentResolver.QUERY_ARG_LIMIT,

@@ -1,5 +1,6 @@
 package com.softaai.randomstringgenerator.di
 
+import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import com.softaai.randomstringgenerator.data.RandomStringDataSource
@@ -25,18 +26,12 @@ import javax.inject.Qualifier
 @InstallIn(SingletonComponent::class)
 object AppDiModule {
     @Provides
-    fun provideRandomStringRepository(): RandomStringRepository {
-        return RandomStringGeneratorRepository(null)
-    }
+    fun provideRandomStringRepository(randomStringDataSource : RandomStringDataSource): RandomStringRepository = RandomStringGeneratorRepository(randomStringDataSource)
+    @Provides
+    fun provideGenerateRandomStringUseCase(repository: RandomStringRepository): GenerateRandomStringUseCase = GenerateRandomStringUseCase(repository)
 
     @Provides
-    fun provideGenerateRandomStringUseCase(repository: RandomStringRepository): GenerateRandomStringUseCase {
-        return GenerateRandomStringUseCase(repository)
-    }
+    fun provideRandomStringDataSource(application: Application): RandomStringDataSource = RandomStringDataSource(application)
 
-    @Provides
-    fun provideRandomStringDataSource(context: Context): RandomStringDataSource {
-        return RandomStringDataSource(context)
-    }
 
 }
