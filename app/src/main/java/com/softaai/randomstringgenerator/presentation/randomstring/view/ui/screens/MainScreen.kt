@@ -20,10 +20,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.softaai.randomstringgenerator.presentation.randomstring.view.ui.theme.RandomStringGeneratorTheme
 import com.softaai.randomstringgenerator.presentation.randomstring.viewmodel.MainViewModel
-import com.softaai.randomstringgenerator.presentation.randomstring.viewmodel.MainViewUIState
 
 
 /**
@@ -33,7 +31,7 @@ import com.softaai.randomstringgenerator.presentation.randomstring.viewmodel.Mai
 
 @Composable
 fun MainScreen() {
-   MainView()
+    MainView()
 }
 
 @Composable
@@ -45,7 +43,10 @@ private fun MainView(viewModel: MainViewModel = hiltViewModel()) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Text(text = "Random String Generator", modifier = Modifier.padding(top = 15.dp, bottom = 10.dp))
+        Text(
+            text = "Random String Generator",
+            modifier = Modifier.padding(top = 15.dp, bottom = 10.dp)
+        )
 
         var text by remember { mutableStateOf("0") }
 
@@ -56,7 +57,7 @@ private fun MainView(viewModel: MainViewModel = hiltViewModel()) {
         )
 
         Button(
-            onClick = { viewModel.generateRandomString("5".toInt())},
+            onClick = { viewModel.generateRandomString(text.toInt()) },
             modifier = Modifier
                 .padding(16.dp), // Optional padding
             colors = ButtonDefaults.textButtonColors(

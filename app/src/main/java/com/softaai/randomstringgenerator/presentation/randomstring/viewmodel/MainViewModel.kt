@@ -1,6 +1,5 @@
 package com.softaai.randomstringgenerator.presentation.randomstring.viewmodel
 
-import android.health.connect.datatypes.units.Length
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -9,8 +8,6 @@ import com.softaai.randomstringgenerator.domain.GenerateRandomStringUseCase
 import com.softaai.randomstringgenerator.domain.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -29,9 +26,8 @@ class MainViewModel @Inject constructor(private val generateRandomStringUseCase:
     private val _state = mutableStateOf(MainViewUIState())
     val state: State<MainViewUIState> = _state
 
-/*    private val _eventFlow = MutableSharedFlow<MainViewEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()*/
-
+    /*    private val _eventFlow = MutableSharedFlow<MainViewEvent>()
+        val eventFlow = _eventFlow.asSharedFlow()*/
 
 
     // Process events sent from the view

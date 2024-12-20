@@ -20,8 +20,6 @@ import android.net.Uri
 class MyContentProvider : ContentProvider() {
 
 
-
-
     companion object {
         // defining authority so that other application can access it
         const val AUTHORITY_NAME = "com.iav.contestdataprovider"
@@ -79,6 +77,7 @@ class MyContentProvider : ContentProvider() {
 
 
     }
+
     // creating the database
     override fun onCreate(): Boolean {
         val context = context
@@ -130,9 +129,11 @@ class MyContentProvider : ContentProvider() {
         throw SQLiteException("Failed to add a record into $uri")
     }
 
-    override fun delete(uri: Uri,
-                        selection: String?,
-                        selectionArgs: Array<String>?): Int {
+    override fun delete(
+        uri: Uri,
+        selection: String?,
+        selectionArgs: Array<String>?
+    ): Int {
         var count = 0
         count = when (uriMatcher!!.match(uri)) {
             uriCode -> db!!.delete(TABLE_NAME, selection, selectionArgs)
@@ -142,8 +143,10 @@ class MyContentProvider : ContentProvider() {
         return count
     }
 
-    override fun update(uri: Uri, values: ContentValues?, selection: String?,
-                        selectionArgs: Array<String>?): Int {
+    override fun update(
+        uri: Uri, values: ContentValues?, selection: String?,
+        selectionArgs: Array<String>?
+    ): Int {
         var count = 0
         count = when (uriMatcher!!.match(uri)) {
             uriCode -> db!!.update(TABLE_NAME, values, selection, selectionArgs)

@@ -9,5 +9,5 @@ import kotlinx.coroutines.flow.Flow
  * softAai Apps.
  */
 interface RandomStringRepository {
-    suspend fun generateRandomString(length: Int) : Flow<Resource<RandomGeneratedString>>
+    suspend fun generateRandomString(length: Int): Flow<Resource<RandomGeneratedString>>
 }
