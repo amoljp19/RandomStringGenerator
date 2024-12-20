@@ -28,9 +28,8 @@ class RandomStringDataSource(private val application: Application) {
 
             val cursor = application.contentResolver.query(
                 Uri.parse("content://com.iav.contestdataprovider/text"),
-                null,
-                ContentResolver.QUERY_ARG_LIMIT,
-                null,
+                null, null,
+                arrayOf(length.toString()),
                 null
             )
 
