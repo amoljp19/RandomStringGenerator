@@ -56,7 +56,7 @@ private fun MainView(viewModel: MainViewModel = hiltViewModel()) {
         )
 
         Button(
-            onClick = { viewModel.generateRandomString(text.toInt())},
+            onClick = { viewModel.generateRandomString("5".toInt())},
             modifier = Modifier
                 .padding(16.dp), // Optional padding
             colors = ButtonDefaults.textButtonColors(

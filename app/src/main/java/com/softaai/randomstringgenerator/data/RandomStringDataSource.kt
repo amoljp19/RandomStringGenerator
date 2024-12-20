@@ -2,15 +2,13 @@ package com.softaai.randomstringgenerator.data
 
 import android.app.Application
 import android.content.ContentResolver
-import android.content.Context
 import android.net.Uri
+import android.os.Bundle
+import android.util.Log
 import com.softaai.randomstringgenerator.domain.RandomGeneratedString
 import com.softaai.randomstringgenerator.domain.resource.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
-import java.io.IOException
 
 
 /**
@@ -26,19 +24,27 @@ class RandomStringDataSource(private val application: Application) {
 
         try {
 
+            val bundle = Bundle().apply {
+                putInt(ContentResolver.QUERY_ARG_LIMIT, 100)
+            }
+
             val cursor = application.contentResolver.query(
                 Uri.parse("content://com.iav.contestdataprovider/text"),
-                null, null,
-                arrayOf(length.toString()),
+                arrayOf("data"),
+               bundle,
                 null
             )
 
 
+
             cursor?.let {
+
                 cursor.moveToFirst()
 
 
                 while (!cursor.isAfterLast) {
+
+                    Log.e("reproducing", cursor.getColumnIndexOrThrow("data").toString())
                     strBuild.append(
                         """
     
