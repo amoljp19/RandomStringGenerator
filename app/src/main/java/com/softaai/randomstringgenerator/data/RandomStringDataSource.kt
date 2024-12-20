@@ -2,9 +2,11 @@ package com.softaai.randomstringgenerator.data
 
 import android.app.Application
 import android.content.ContentResolver
+import android.content.UriMatcher
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import com.softaai.randomstringgenerator.deprecated.provider.MyContentProvider
 import com.softaai.randomstringgenerator.domain.RandomGeneratedString
 import com.softaai.randomstringgenerator.domain.resource.Resource
 import kotlinx.coroutines.flow.Flow
@@ -17,6 +19,7 @@ import kotlinx.coroutines.flow.flow
  */
 class RandomStringDataSource(private val application: Application) {
 
+
     suspend fun generateRandomString(length: Int): Flow<Resource<RandomGeneratedString>> = flow {
 
         emit(Resource.Loading())
@@ -24,18 +27,13 @@ class RandomStringDataSource(private val application: Application) {
 
         try {
 
-            val bundle = Bundle().apply {
-                putInt(ContentResolver.QUERY_ARG_LIMIT, 100)
-            }
-
             val cursor = application.contentResolver.query(
                 Uri.parse("content://com.iav.contestdataprovider/text"),
                 arrayOf("data"),
-               bundle,
+               null,
+                arrayOf(length.toString()),
                 null
             )
-
-
 
             cursor?.let {
 
@@ -44,13 +42,15 @@ class RandomStringDataSource(private val application: Application) {
 
                 while (!cursor.isAfterLast) {
 
-                    Log.e("reproducing", cursor.getColumnIndexOrThrow("data").toString())
+                    Log.e("reproducing 1", cursor.getColumnIndexOrThrow("data").toString())
                     strBuild.append(
                         """
     
     ${cursor.getString(cursor.getColumnIndexOrThrow("data"))}
     """.trimIndent()
                     )
+
+                    Log.e("reproducing 2", strBuild.toString())
                     cursor.moveToNext()
                 }
                 cursor.close()
