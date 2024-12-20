@@ -1,4 +1,4 @@
-package com.softaai.randomstringgenerator.ui.screens
+package com.softaai.randomstringgenerator.presentation.randomstring.view.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,17 +8,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.semantics.SemanticsActions.OnClick
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.softaai.randomstringgenerator.domain.RandomGeneratedString
-import com.softaai.randomstringgenerator.presentation.MainViewModel
-import com.softaai.randomstringgenerator.presentation.OnClickGenerateRandomStringEvent
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.softaai.randomstringgenerator.presentation.randomstring.viewmodel.MainViewModel
 
 
 /**
@@ -27,25 +23,14 @@ import com.softaai.randomstringgenerator.presentation.OnClickGenerateRandomStrin
  */
 
 @Composable
-fun MainScreenContent(
-    viewModel: MainViewModel = hiltViewModel(),
-) {
-    // Collect state from the ViewModel
-    val state by viewModel.state.collectAsState()
+fun MainScreen() {
 
-    // Pass events to the ViewModel via listeners
-    MainScreen(
-        state = state,
-        OnClickGenerateRandomString = { viewModel.onEvent(OnClickGenerateRandomStringEvent) }
-    )
-
-    RandomGeneratedString(state = state, OnClickGenerateRandomString)
+    MainView(viewModel = hiltViewModel())
 }
 
 @Composable
-private fun MainScreen(
-    state: MainScreenState,
-    onClickGeneratedString: OnClickGenerateRandomStringEvent: () -> Unit
+private fun MainView(
+    viewModel: MainViewModel
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -54,17 +39,19 @@ private fun MainScreen(
     ) {
         Text(text = "Random String Generato", modifier = Modifier.padding(bottom = 10.dp))
         // Trigger ViewModel event on button click
-        Button(onClick = onClickGeneratedString,
+        Button(
+            onClick = {},
             modifier = Modifier
                 .padding(16.dp), // Optional padding
             colors = ButtonDefaults.textButtonColors(
                 containerColor = Color.DarkGray,
                 contentColor = Color.White,
                 disabledContentColor = Color.LightGray
-            )) {
+            )
+        ) {
             Text(text = "My Counter")
         }
         // Display the counter from the state
-        Text(text = "+${state.counter}", fontSize = 40.sp)
+        Text(text = "+${0}", fontSize = 40.sp)
     }
 }

@@ -1,5 +1,6 @@
 package com.softaai.randomstringgenerator.domain
 
+import com.softaai.randomstringgenerator.domain.resource.Resource
 import kotlinx.coroutines.flow.Flow
 
 
@@ -8,5 +9,5 @@ import kotlinx.coroutines.flow.Flow
  * softAai Apps.
  */
 interface RandomStringRepository {
-    suspend fun generateRandomString(length: Int = 100) : Flow<RandomGeneratedString>
+    suspend fun generateRandomString(length: Int = 100) : Flow<Resource<RandomGeneratedString>>
 }

@@ -1,4 +1,4 @@
-package com.softaai.randomstringgenerator
+package com.softaai.randomstringgenerator.presentation.randomstring.view
 
 import android.content.ContentResolver
 import android.net.Uri
@@ -21,7 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.softaai.randomstringgenerator.ui.theme.RandomStringGeneratorTheme
+import com.softaai.randomstringgenerator.presentation.randomstring.view.ui.theme.RandomStringGeneratorTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -80,11 +80,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-}
-
-@Composable
-fun MainScreen() {
-    Text(text = "Show")
 }
 
 

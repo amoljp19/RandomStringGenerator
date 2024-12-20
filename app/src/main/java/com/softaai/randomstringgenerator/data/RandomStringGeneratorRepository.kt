@@ -2,6 +2,7 @@ package com.softaai.randomstringgenerator.data
 
 import com.softaai.randomstringgenerator.domain.RandomGeneratedString
 import com.softaai.randomstringgenerator.domain.RandomStringRepository
+import com.softaai.randomstringgenerator.domain.resource.Resource
 import kotlinx.coroutines.flow.Flow
 
 
@@ -11,6 +12,6 @@ import kotlinx.coroutines.flow.Flow
  */
 class RandomStringGeneratorRepository(private val source: RandomStringDataSource) :
     RandomStringRepository {
-    override suspend fun generateRandomString(length: Int): Flow<RandomGeneratedString> =
+    override suspend fun generateRandomString(length: Int): Flow<Resource<RandomGeneratedString>> =
         source.generateRandomString(length)
 }

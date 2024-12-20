@@ -1,4 +1,4 @@
-package com.softaai.randomstringgenerator.ui.theme
+package com.softaai.randomstringgenerator.presentation.randomstring.view.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

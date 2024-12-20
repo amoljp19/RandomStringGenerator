@@ -69,7 +69,12 @@ dependencies {
     kapt(libs.hilt.android.compiler)
 
     implementation(libs.kotlinx.coroutines.android)
-    
+
+    //compose navigation
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

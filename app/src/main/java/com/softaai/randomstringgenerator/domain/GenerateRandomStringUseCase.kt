@@ -1,6 +1,7 @@
 package com.softaai.randomstringgenerator.domain
 
 import android.health.connect.datatypes.units.Length
+import com.softaai.randomstringgenerator.domain.resource.Resource
 import kotlinx.coroutines.flow.Flow
 
 
@@ -12,5 +13,5 @@ import kotlinx.coroutines.flow.Flow
 //avoided etra layer of interface for simplicity, but we can go for usecases interface also
 class GenerateRandomStringUseCase(private val repository: RandomStringRepository) {
 
-    suspend fun generateRandomString(length: Int): Flow<RandomGeneratedString> = repository.generateRandomString(length)
+    suspend operator fun invoke(length: Int): Flow<Resource<RandomGeneratedString>> = repository.generateRandomString(length)
 }

@@ -1,4 +1,4 @@
-package com.softaai.randomstringgenerator.presentation
+package com.softaai.randomstringgenerator.presentation.randomstring.viewmodel
 
 
 /**
