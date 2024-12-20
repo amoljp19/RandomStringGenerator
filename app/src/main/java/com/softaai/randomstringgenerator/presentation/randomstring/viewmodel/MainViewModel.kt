@@ -1,5 +1,6 @@
 package com.softaai.randomstringgenerator.presentation.randomstring.viewmodel
 
+import android.health.connect.datatypes.units.Length
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -21,24 +22,22 @@ import javax.inject.Inject
  * softAai Apps.
  */
 @HiltViewModel
-class MainViewModel @Inject constructor(private val generateRandomString: GenerateRandomStringUseCase) :
+class MainViewModel @Inject constructor(private val generateRandomStringUseCase: GenerateRandomStringUseCase) :
     ViewModel() {
 
-    private val _length = mutableStateOf(0)
-    val length: State<Int> = _length
 
     private val _state = mutableStateOf(MainViewUIState())
     val state: State<MainViewUIState> = _state
 
-    private val _eventFlow = MutableSharedFlow<MainViewEvent>()
-    val eventFlow = _eventFlow.asSharedFlow()
+/*    private val _eventFlow = MutableSharedFlow<MainViewEvent>()
+    val eventFlow = _eventFlow.asSharedFlow()*/
 
 
 
     // Process events sent from the view
-    fun generateRandomString() {
+    fun generateRandomString(length: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            generateRandomString(length = 100).onEach { result ->
+            generateRandomStringUseCase(length).onEach { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _state.value = state.value.copy(
