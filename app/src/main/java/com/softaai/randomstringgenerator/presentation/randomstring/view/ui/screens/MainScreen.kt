@@ -24,7 +24,6 @@ import com.softaai.randomstringgenerator.presentation.randomstring.viewmodel.Mai
 
 @Composable
 fun MainScreen() {
-
     MainView(viewModel = hiltViewModel())
 }
 
@@ -32,15 +31,16 @@ fun MainScreen() {
 private fun MainView(
     viewModel: MainViewModel
 ) {
+    val state = viewModel.state.value
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Random String Generato", modifier = Modifier.padding(bottom = 10.dp))
-        // Trigger ViewModel event on button click
+        Text(text = "Random String Generator", modifier = Modifier.padding(bottom = 10.dp))
+
         Button(
-            onClick = {},
+            onClick = {viewModel.generateRandomString()},
             modifier = Modifier
                 .padding(16.dp), // Optional padding
             colors = ButtonDefaults.textButtonColors(
@@ -49,9 +49,9 @@ private fun MainView(
                 disabledContentColor = Color.LightGray
             )
         ) {
-            Text(text = "My Counter")
+            Text(text = "Generate Random String")
         }
-        // Display the counter from the state
-        Text(text = "+${0}", fontSize = 40.sp)
+        // Display the newly generated random string
+        Text(text = state.randomString, fontSize = 40.sp)
     }
 }

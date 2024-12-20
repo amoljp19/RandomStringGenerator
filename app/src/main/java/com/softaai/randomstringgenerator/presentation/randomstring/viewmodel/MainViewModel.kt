@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(private val generateRandomString: Genera
 
 
     // Process events sent from the view
-    fun onGenerateRandomString(event: MainViewEvent) {
+    fun generateRandomString() {
         viewModelScope.launch {
             generateRandomString(length = 100).onEach { result ->
                 when (result) {
