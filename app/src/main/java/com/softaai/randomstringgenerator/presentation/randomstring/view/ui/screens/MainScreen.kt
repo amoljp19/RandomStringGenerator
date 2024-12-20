@@ -52,6 +52,6 @@ private fun MainView(
             Text(text = "Generate Random String")
         }
         // Display the newly generated random string
-        Text(text = state.randomString, fontSize = 40.sp)
+        Text(text = state.randomString, fontSize = 12.sp)
     }
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.softaai.randomstringgenerator.domain.GenerateRandomStringUseCase
 import com.softaai.randomstringgenerator.domain.resource.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.launchIn
@@ -36,26 +37,26 @@ class MainViewModel @Inject constructor(private val generateRandomString: Genera
 
     // Process events sent from the view
     fun generateRandomString() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             generateRandomString(length = 100).onEach { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _state.value = state.value.copy(
-                            randomString = result.data.toString() ?: "",
+                            randomString = result.data?.randomString ?: "",
                             isLoading = true
                         )
                     }
 
                     is Resource.Success -> {
                         _state.value = state.value.copy(
-                            randomString = result.data.toString() ?: "",
+                            randomString = result.data?.randomString ?: "",
                             isLoading = false
                         )
                     }
 
                     is Resource.Error -> {
                         _state.value = state.value.copy(
-                            randomString = result.data.toString() ?: "",
+                            randomString = result.data?.randomString ?: "",
                             isLoading = false
                         )
 

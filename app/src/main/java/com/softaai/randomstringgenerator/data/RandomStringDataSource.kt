@@ -21,48 +21,46 @@ class RandomStringDataSource(private val application: Application) {
 
     suspend fun generateRandomString(length: Int): Flow<Resource<RandomGeneratedString>> = flow {
 
-        withContext(Dispatchers.IO){
-            emit(Resource.Loading())
-            val strBuild = StringBuilder()
+        emit(Resource.Loading())
+        val strBuild = StringBuilder()
 
-            try {
+        try {
 
-                val cursor = application.contentResolver.query(
-                    Uri.parse("content://com.iav.contestdataprovider/text"),
-                    null,
-                    ContentResolver.QUERY_ARG_LIMIT,
-                    null,
-                    null
-                )
-
-
-                cursor?.let {
-                    cursor.moveToFirst()
+            val cursor = application.contentResolver.query(
+                Uri.parse("content://com.iav.contestdataprovider/text"),
+                null,
+                ContentResolver.QUERY_ARG_LIMIT,
+                null,
+                null
+            )
 
 
-                    while (!cursor.isAfterLast) {
-                        strBuild.append(
-                            """
+            cursor?.let {
+                cursor.moveToFirst()
+
+
+                while (!cursor.isAfterLast) {
+                    strBuild.append(
+                        """
     
     ${cursor.getString(cursor.getColumnIndexOrThrow("data"))}
     """.trimIndent()
-                        )
-                        cursor.moveToNext()
-                    }
-                    cursor.close()
-                }
-
-            } catch (e: Exception){
-                emit(
-                    Resource.Error(
-                        message = "Error in Generating Random String"
                     )
-                )
+                    cursor.moveToNext()
+                }
+                cursor.close()
             }
 
-
-            emit(Resource.Success(RandomGeneratedString(strBuild.toString())))
+        } catch (e: Exception){
+            emit(
+                Resource.Error(
+                    message = "Error in Generating Random String"
+                )
+            )
         }
+
+
+        emit(Resource.Success(RandomGeneratedString(strBuild.toString())))
 
     }
 
