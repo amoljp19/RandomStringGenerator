@@ -1,6 +1,7 @@
 package com.softaai.randomstringgenerator.data
 
 import android.app.Application
+import android.content.UriMatcher
 import android.net.Uri
 import android.util.Log
 import com.softaai.randomstringgenerator.domain.RandomGeneratedString
@@ -16,6 +17,7 @@ import kotlinx.coroutines.flow.flow
 class RandomStringDataSource(private val application: Application) {
 
 
+
     suspend fun generateRandomString(length: Int): Flow<Resource<RandomGeneratedString>> = flow {
 
         emit(Resource.Loading())
@@ -23,11 +25,18 @@ class RandomStringDataSource(private val application: Application) {
 
         try {
 
+            val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
+
+            val type: String? = application.contentResolver.getType(Uri.parse("content://com.iav.contestdataprovider/text"))
+
+            Log.e("reproducing Type", type.toString())   // type also returning same mime type that is vnd.android.cursor.dir/text
+
+
             val cursor = application.contentResolver.query(
-                Uri.parse("content://com.iav.contestdataprovider/text/$5"),
-                /*arrayOf("data")*/ null,
-                /*"data = ?*/null,
-                /*arrayOf(length.toString())*/ null,
+                Uri.parse("content://com.iav.contestdataprovider/text"),
+                arrayOf("data") ,
+                "data = ?",
+                arrayOf(length.toString()),
                 null
             )
 

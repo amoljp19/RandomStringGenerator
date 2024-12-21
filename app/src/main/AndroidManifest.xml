@@ -34,13 +34,13 @@
             </intent-filter>
         </activity>
 
-        <provider
+        <!--<provider
             android:name="com.softaai.randomstringgenerator.deprecated.provider.MyContentProvider"
             android:authorities="${applicationId}.com.iav.contestdataprovider"
             android:enabled="true"
             android:exported="true">
 
-        </provider>
+        </provider>-->
 
     </application>
 
