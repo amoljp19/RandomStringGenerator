@@ -25,13 +25,16 @@ class RandomStringDataSource(private val application: Application) {
 
             val cursor = application.contentResolver.query(
                 Uri.parse("content://com.iav.contestdataprovider/text"),
-                arrayOf("data"),
-                null,
-                arrayOf(length.toString()),
+                /*arrayOf("data")*/ null,
+                /*"data = ?*/null,
+                /*arrayOf(length.toString())*/ null,
                 null
             )
 
+
             cursor?.let {
+
+                Log.e("reproducing cursor count : ", cursor.count.toString())
 
                 cursor.moveToFirst()
 
