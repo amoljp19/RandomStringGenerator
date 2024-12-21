@@ -5,8 +5,26 @@ call in afternoon, I need selection criteria related more infromation, I mean in
 going further and trying things I feel waste of my time and efforts. So decided stop working on another use cases further, I hope you understand this situation.
 
 BTW, I followed proper clean + MVVM architecture and latest android developement tech stack along with jetpack compose. even passing dynamic length in query and error handling also done, delete or showing list of string that is not big deal to achieve but due to above 
-situation not worked on those usecases. One Deprecated package is present in codebase, that is, initally I built normal contenProvider and tested, does random string comming from provided .apk file or not, that time also 100 lenght random string comming, but later I improved that as per architecture, so earlier MyContentProvider put into that deprecated package.
+situation not worked on those usecases. One Deprecated package is present in codebase, that is, initally I built normal contenProvider and tested, does random string comming from provided .apk file or not, that time also 100 lenght random string comming, but later I improved that as per architecture, so earlier MyContentProvider file put into that deprecated package.
 
+I tested today morning again, its confirm query method only return single record and that is:
+
+{
+  "randomText": {
+    "value": "9lLuhnRYrOThb6kKrqay8Ia3u6zd8ZxpXCEjT6Ncn5xNnzTIc61FY1FiKwdMNZ8PDUQXQ41aY4SSqNLrqKgdzaUEEeenGMwFh81C",
+    "length": 100,
+    "created": "2024-12-21T11:06:19Z"
+  }
+}
+
+confirming based on this links
+
+https://www.youtube.com/watch?v=eNW1d8tiXmQ
+https://www.youtube.com/watch?v=r8CNSmOSfN4
+https://www.kodeco.com/books/saving-data-on-android/v2.0/chapters/4-contentprovider
+https://stackoverflow.com/questions/6736065/contentprovider-query-how-to-select-the-table-i-want-using-uris
+https://learn.microsoft.com/en-us/dotnet/api/android.content.contentprovider.query?view=net-android-34.0
+https://stackoverflow.com/questions/5744944/how-to-add-custom-mime-type
 
 # Screenshots
 
@@ -16,8 +34,7 @@ situation not worked on those usecases. One Deprecated package is present in cod
 ![100LengthString](https://github.com/user-attachments/assets/6ed6a135-70dc-42e5-a375-26aa7d63ba1f)
 
 
-
-
+[Screen Recording 2024-12-21 003229.zip](https://github.com/user-attachments/files/18217369/Screen.Recording.2024-12-21.003229.zip)
 
 
 
